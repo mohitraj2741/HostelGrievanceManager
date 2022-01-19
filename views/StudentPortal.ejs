@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Dashboard - Student</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/StudentPortalStyles.css">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <header class="header">
+            <a href="" class="logo">Student Dashboard</a>
+            <div class="logout">
+                <a href="/StudentLoginSignup" class="btn btn-primary">Logout</a>
+            </div>
+        </header>
+
+       
+
+        <aside>
+
+            <ul>
+                <li>
+                    <a href="#details">About</a>
+                </li>
+
+                <li>
+                    <a href="#complaint">Register Complaint</a>
+                </li>
+
+                <li>
+                    <a href="#status">Status</a>
+                </li>
+
+                
+            </ul>
+        </aside>
+
+        <div class="content">
+            
+
+            <div class="detailss" id="details">
+
+                <h1>Credentials of the user :</h1>
+                <div class="details__card">
+                    <p><b>Name :</b> <em><%= name %></em></p>
+                    <p><b>Email :</b> <em><%= Email %></em></p>
+                    <p><b>USN :</b> <em><%= Usn %></em></p>
+                    <p><b>Room Number :</b> <em><%= Room %></em></p>
+                    <p><b>Phone Number :</b> <em><%= phone %></em></p>
+                </div>
+                
+            </div>
+
+            <div class="complaint" >
+
+                <h1 id="complaint">Complaint Form</h1>
+
+                <div class="container">
+                    <div class="title">Registration</div>
+                    <div class="contentt">
+
+                      <form action="/status_post_route" method="post">
+                        
+                        <div class="user-details">
+                          <div class="input-box">
+                            <span class="details">Full Name</span>
+                            <input type="text" placeholder="Enter your name" name="Comname" required>
+                          </div>
+                          <div class="input-box">
+                            <span class="details">Room Number</span>
+                            <input type="text" placeholder="Enter your Room Number" name="Comroom" required>
+                          </div>
+                          <div class="input-box">
+                            <span class="details">Email</span>
+                            <input type="text" placeholder="Enter your email" name="Comemail"  required>
+                          </div>
+                          <div class="input-box">
+                            <span class="details">Phone Number</span>
+                            <input type="text" placeholder="Enter your number" name="Comphone" required>
+                          </div>
+                          <div class="input-box">
+                            <span class="details">USN</span>
+                            <input type="text" placeholder="Enter your USN" name="Comusn" required>
+                          </div>
+                          <div class="input-box">
+                            <span class="details">Category</span>
+                            <select class="category" name="Comcategory">
+                              <option value="">Select a category</option>
+                              <option value="Electric">Electric</option>
+                              <option value="Carpenter">Carpenter</option>
+                              <option value="Wifi">Wifi</option>
+                              <option value="Others">Others</option>
+                            </select>
+                          </div>
+                        </div>
+                        
+                        <div class="button">
+                          <input type="submit" value="Register">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                
+
+            </div>
+            <div class="Status" id="status">
+              <h1>Status</h1>
+              <form>
+                <a href="/Status/<%= Usn %>" class="sbutton">Go to Status</a>
+            </form>
+            </div>
+       
+        </div>
+        
+        
+    </body>
+</html>
