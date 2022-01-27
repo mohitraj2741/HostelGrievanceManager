@@ -287,3 +287,7 @@ form .user-details .input-box{
  /* transform: scale(0.99); */
  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
  }
+
+ textarea{
+   width:40rem;
+ }

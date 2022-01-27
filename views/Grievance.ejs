@@ -33,6 +33,7 @@
                                 <th scope="col">Category</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Message</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -45,8 +46,9 @@
                                 <td><%=Grecords[i].Room_No %></td>
                                 <td><%=Grecords[i].category %></td>
                                 <td><%=Grecords[i].Request_date %></td>
-                                <form action="/showGrievances/<%=Grecords[i].G_id%>" method="get"><td><button class="btn-lg btn-primary" type="submit">Resolve</button></td></form>
+                                <form action="/showMessages/<%=Grecords[i].G_id%>" method="get"><td><button class="btn-lg btn-warning" type="submit">Description</button></td></form>
                               <!-- thik kar lena isme error h -->
+                              <form action="/showGrievances/<%=Grecords[i].G_id%>" method="get"><td><button class="btn-lg btn-success" type="submit">Resolve</button></td></form>
                               </tr>
     
                               <% } %>

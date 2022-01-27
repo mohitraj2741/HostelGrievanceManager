@@ -4,6 +4,81 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
+  <style>
+
+    /* body {
+margin: 0;
+padding: 0;
+width: 100%;
+height: 100vh;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+background: #000;
+} */
+
+.glow-on-hover {
+width: 720px;
+height: 400px;
+font-size: 2rem;
+border: none;
+outline: none;
+color: #fff;
+background: #111;
+cursor: pointer;
+position: relative;
+z-index: 0;
+border-radius: 10px;
+}
+
+.glow-on-hover:before {
+content: '';
+background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+position: absolute;
+top: -4px;
+left:-4px;
+background-size: 600%;
+z-index: -1;
+filter: blur(5px);
+width: calc(100% + 8px);
+height: calc(100% + 8px);
+animation: glowing 20s linear infinite;
+opacity: 0;
+transition: opacity .3s ease-in-out;
+border-radius: 10px;
+}
+
+.glow-on-hover:active {
+color: #000
+}
+
+.glow-on-hover:active:after {
+background: transparent;
+}
+
+.glow-on-hover:hover:before {
+opacity: 1;
+}
+
+.glow-on-hover:after {
+z-index: -1;
+content: '';
+position: absolute;
+width: 100%;
+height: 100%;
+background: #424A5B;
+left: 0;
+top: 0;
+border-radius: 10px;
+}
+
+@keyframes glowing {
+0% { background-position: 0 0; }
+50% { background-position: 400% 0; }
+100% { background-position: 0 0; }
+}
+</style>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,7 +121,7 @@
                 </li>
 
                 <li>
-                    <a href="#status">Status</a>
+                    <a href="/Status/<%= Usn %>">Status</a>
                 </li>
 
                 
@@ -60,11 +135,13 @@
 
                 <h1>Credentials of the user :</h1>
                 <div class="details__card">
+                  <button class="glow-on-hover" type="button">
                     <p><b>Name :</b> <em><%= name %></em></p>
                     <p><b>Email :</b> <em><%= Email %></em></p>
                     <p><b>USN :</b> <em><%= Usn %></em></p>
                     <p><b>Room Number :</b> <em><%= Room %></em></p>
                     <p><b>Phone Number :</b> <em><%= phone %></em></p>
+                    </button>
                 </div>
                 
             </div>
@@ -72,7 +149,7 @@
             <div class="complaint" >
 
                 <h1 id="complaint">Complaint Form</h1>
-
+               
                 <div class="container">
                     <div class="title">Registration</div>
                     <div class="contentt">
@@ -111,6 +188,10 @@
                             </select>
                           </div>
                         </div>
+                        <div>
+                          <textarea placeholder="Grievance Description" name="description"></textarea>
+                        </div>
+                        
                         
                         <div class="button">
                           <input type="submit" value="Register">
@@ -121,15 +202,12 @@
                 
 
             </div>
-            <div class="Status" id="status">
+            <!-- <div class="Status" id="status">
               <h1>Status</h1>
               <form>
                 <a href="/Status/<%= Usn %>" class="sbutton">Go to Status</a>
             </form>
-            </div>
-       
+            </div> -->
         </div>
-        
-        
     </body>
 </html>

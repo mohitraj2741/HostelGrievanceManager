@@ -54,12 +54,25 @@ app.get("/showGrievances/:G_id", function(req,res){
             res.render("Grievance",{Grecords:results});
 
          });
-       }
-
-    
+        } 
   });
 
 });
+
+app.get("/showMessages/:G_id", function(req,res){
+  let {G_id}= req.params;
+            var sql_grv= "SELECT message from Grievances where G_id=?";
+             db.query(sql_grv,[G_id],function(err,results){
+            console.log(results);
+
+            res.render("Message",{Grecords:results});
+
+         });
+         
+  
+
+});
+
  
 
 
@@ -267,8 +280,9 @@ app.post("/status_post_route",function(req,res){
   var datex = new Date(unixTimestamp);
   var date=datex.getDate()+"/"+(datex.getMonth()+1)+"/"+datex.getFullYear();
   var status=0;
-  
-  var sql1=`INSERT INTO Grievances VALUES ('${G_id +room}','${cate}','${emp_id}','${usn}','${room}','${date}','${status}')`;
+  var message = req.body.description;
+  console.log(message);
+  var sql1=`INSERT INTO Grievances VALUES ('${G_id +room}','${cate}','${emp_id}','${usn}','${room}','${date}','${status}','${message}')`;
 
   db.query(sql1,function(error,result){
     if(error)
@@ -279,8 +293,6 @@ app.post("/status_post_route",function(req,res){
       console.log(result);
     }  
   });
-
-
   res.render("ThankYou");
 });
 app.get("/status/:Usn",function(req,res){
@@ -291,15 +303,26 @@ app.get("/status/:Usn",function(req,res){
     if(error)
     console.log(error);
     else{
-
       res.render("Status",{Grecords:result});
-
     }
-  });
-
-  
-     
-     
+  });     
+});
+app.get("/editstatus/:G_id/:usn",function(req,res){
+  let {G_id}= req.params;
+  let {usn}=req.params;
+  var sql_status="Delete  from Grievances where G_id=?";
+  db.query(sql_status,[G_id],function(error,result){
+    if(error)
+    console.log(error);
+    else{
+    var sql_grv= "SELECT * from Grievances where USN=?";
+    db.query(sql_grv,[usn],function(err,results){
+    console.log(results);
+       res.render("Status",{Grecords:results});
+       });
+       
+    }
+  });     
 });
 app.listen(port, function(){
   console.log("Server started on port 3000");
