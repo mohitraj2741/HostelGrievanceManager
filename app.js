@@ -27,28 +27,26 @@ app.get("/AdminLoginSignup",function(req,res){
   res.render("adminLogin",{message:Amessage});
 });
 
-app.get("/showGrievances", function(req,res){
-
-      var sql_grv= "SELECT * from Grievances where Gstatus=?";
-          db.query(sql_grv,[0],function(err,results){
+app.get("/showGrievances/:ccode", function(req,res){
+     let {ccode}=req.params;
+      var sql_grv= "SELECT * from Grievances where Gstatus=? and Clgcode=?";
+          db.query(sql_grv,[0,ccode],function(err,results){
             console.log(results);
-
             res.render("Grievance",{Grecords:results});
-
         });
           
 });
 
-app.get("/showGrievances/:G_id", function(req,res){
+app.get("/showGrievancesAgain/:G_id/:ccode", function(req,res){
   let {G_id}= req.params;
-
+  let {ccode}=req.params;
   var sql_resolve= "UPDATE Grievances set Gstatus=? where G_id=?";
   db.query(sql_resolve,[1,G_id],function(err,result){
         if(err)
           console.log(err);
         else{
-            var sql_grv= "SELECT * from Grievances where Gstatus=?";
-             db.query(sql_grv,[0],function(err,results){
+            var sql_grv= "SELECT * from Grievances where Gstatus=? and Clgcode=?";
+             db.query(sql_grv,[0,ccode],function(err,results){
             console.log(results);
 
             res.render("Grievance",{Grecords:results});
@@ -257,7 +255,7 @@ app.post("/StudentLogin",function(req,res){
   });
  });
 app.post("/status_post_route",function(req,res){
-  var name= req.body.Comname;
+  var Ccode= req.body.Comcode;
   var room=req.body.Comroom;
   var G_id=Math.floor((Math.random() * 101)+1);
   var cate=req.body.Comcategory;
@@ -282,7 +280,7 @@ app.post("/status_post_route",function(req,res){
   var status=0;
   var message = req.body.description;
   console.log(message);
-  var sql1=`INSERT INTO Grievances VALUES ('${G_id +room}','${cate}','${emp_id}','${usn}','${room}','${date}','${status}','${message}')`;
+  var sql1=`INSERT INTO Grievances VALUES ('${G_id +room}','${cate}','${emp_id}','${usn}','${room}','${date}','${status}','${message}','${Ccode}')`;
 
   db.query(sql1,function(error,result){
     if(error)
